@@ -39,14 +39,23 @@ footer {
 }
 
 .box {
-    height: calc(100% / 10);
-    width: calc(100% / 10);
     border: 1px solid black;
    display: flex;
    justify-content: center;
    align-items: center;
 }
-
+.column7{
+    height: calc(100% / 7);
+    width: calc(100% / 7);
+}
+.column9{
+    height: calc(100% / 9);
+    width: calc(100% / 9);
+}
+.column10{
+    height: calc(100% / 10);
+    width: calc(100% / 10);
+}
 .azure {
     background-color: azure;
 }
