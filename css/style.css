@@ -1,0 +1,52 @@
+/* !RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mc_wrapper {
+    height: 100vh;
+}
+
+.mc_wrapper > * {
+    padding: 0 3rem;
+}
+
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    height: calc(100% - 120px);
+    background-color: aquamarine;
+}
+
+footer {
+    height: 40px;
+    line-height: 40px;
+}
+
+.container {
+    height: 800px;
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.box {
+    height: calc(100% / 10);
+    width: calc(100% / 10);
+    border: 1px solid black;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.azure {
+    background-color: azure;
+}
