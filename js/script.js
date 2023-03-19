@@ -1,69 +1,66 @@
-const difficulty = document.getElementById('difficulty')
+const difficultyInput = document.getElementById('difficulty')
 const play = document.getElementById('play');
-const grid = document.querySelector('.container');
+const container = document.querySelector('.container');
 
 play.addEventListener("click", function(){
-    const mode = difficulty.value;
-    const numberOfSquares = squareRegulator(mode);
-    const numbers = myArrayGenerator(numberOfSquares);
-    grid.innerHTML= '';
-    for (let i = 0; i < numbers.length; i++){
-        const currentNumber = numbers[i];
-        const newGrid = boxGenerator(currentNumber);
-        newGrid.addEventListener("click", handleDivClick);
-        grid.append(newGrid);
-        console.log(newGrid);
-    }
-    // grillRegulator();
+    const difficulty = difficultyInput.value;
+    const gridValues = gridValuesGenerator(difficulty);
+    const boxNumber = gridValues[0];
+    const boxColumn = gridValues[1];
+    console.log(boxNumber, boxColumn);
+    container.innerHTML= '';
+    gridGenerator(boxNumber, boxColumn);
+    addFunctionToQuerySelectorAll('div.box', handleDivClick);
 })
 
 // !FUNCTIONS
 // #@general
-function myArrayGenerator(totalSquare){
-    const myArray = [];
-    for(let i = 1; myArray.length < totalSquare; i++) {
-        const myNumber = i;
-        myArray.push(myNumber);
-    }
-    return myArray;
-}
+function gridValuesGenerator(anyMode){
+    const modeArray = [];
+    let boxNumber = '';
+    let boxColumn = '';
+        if (anyMode === 'easy'){
+            boxNumber = 100;
+            boxColumn = "column10"
 
-
-function squareRegulator(anyMode){
-    if(anyMode === 'easy'){
-        anyMode = 100;
-    } else if( anyMode === 'medium'){
-        anyMode = 81;
+    } else if ( anyMode === 'medium'){
+        boxNumber = 81;
+        boxColumn = "column9"
     } else if (anyMode === 'hard'){
-        anyMode = 49;
+        boxNumber = 49;
+        boxColumn = "column7"
     }
-    return anyMode;
+    modeArray.push(boxNumber, boxColumn)
+    return modeArray;
 }
+
+function gridGenerator (generalNumber, generalColumn){
+    for (let i = 1; i <= generalNumber; i++){
+        const grid = gridBoxGenerator(i, generalColumn)
+        container.append(grid);
+    }
+}
+
+function gridBoxGenerator(generalContent, generalColumn){
+    const item = document.createElement("div");
+    const itemContent = document.createElement("span");
+    const content = generalContent;
+    item.classList.add("box", generalColumn);
+    item.appendChild(itemContent);
+    itemContent.innerText = content;
+    return item;    
+}
+
 // @dom related function
-
-function boxGenerator(content){
-    const mode = difficulty.value;
-    const dif = grillRegulator(mode)
-    const newDiv = document.createElement("div");
-    newDiv.classList.add("box", dif);
-    newDiv.innerHTML = `<span>${content}</span>`;
-    return newDiv;
-}
-
 function handleDivClick(){
     console.log(this.textContent);
     this.classList.add("azure");
 }
 
-function grillRegulator(anyItem){
-    let columns = '';
-    if(anyItem === "easy") {
-        columns = "column10"
-    } else if (anyItem === "medium"){
-        columns = "column9"
-    } else if (anyItem === "hard"){
-        columns = "column7"
+function addFunctionToQuerySelectorAll(genericElement, genericFunction){
+    const elementArray = document.querySelectorAll(genericElement);
+    for (i = 0; i < elementArray.length; i++){
+        const currentElement = elementArray[i];
+        currentElement.addEventListener("click", genericFunction)
     }
-    return columns;
-
 }
